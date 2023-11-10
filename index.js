@@ -9,10 +9,15 @@ const path = require('path')
 
 
 App.use(express.json())
-App.use(express.static(path.resolve(__dirname, 'dist', 'index.html')))
+App.use(express.static(path.resolve(__dirname,'dist')))
 App.use(cors())
 App.use('/api/courses', CourseRouter)
 App.use('/auth', AuthRouter)
+App.use('*', (req, res, next) => {
+
+  res.sendFile(path.resolve(__dirname,'dist/index.html'))
+
+})
 
 main().catch(err => console.log(err));
 async function main() {
