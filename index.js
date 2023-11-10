@@ -5,9 +5,11 @@ const CourseRouter = require('./Routers/Course')
 const AuthRouter = require('./Routers/Auth')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 
 
 App.use(express.json())
+App.use(express.static(path.resolve(__dirname, 'dist', 'index.html')))
 App.use(cors())
 App.use('/api/courses', CourseRouter)
 App.use('/auth', AuthRouter)
@@ -20,6 +22,6 @@ async function main() {
 
 App.listen(process.env.PORT, () => {
   console.log(
-    `server is listening http://localhost:${process.env.PORT}`
+    `server is listening ${__dirname, process.env.PORT}`
   );
 });
